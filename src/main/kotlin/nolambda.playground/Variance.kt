@@ -1,4 +1,4 @@
-package com.esafirm.kotlin.playground
+package nolambda.playground
 
 fun variance() {
     var test = listOf<Any>()
