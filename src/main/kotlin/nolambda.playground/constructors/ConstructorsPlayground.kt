@@ -1,3 +1,4 @@
+
 fun main(args: Array<String>) {
     Bird()
     println("======")
@@ -22,7 +23,7 @@ class House {
 
 }
 
-open class Animal(name: String) {
+abstract class Animal(name: String) {
 
     constructor() : this("Animal") {
         println("init in Animal secondary contructor")
@@ -30,7 +31,10 @@ open class Animal(name: String) {
 
     init {
         println("init in Animal")
+        onInitCalled()
     }
+
+    abstract fun onInitCalled()
 }
 
 class Bird(name: String) : Animal(name) {
@@ -44,9 +48,14 @@ class Bird(name: String) : Animal(name) {
     init {
         println("init in Bird")
     }
+
+    override fun onInitCalled() {
+        println("on init called")
+    }
 }
 
 class Dog() : Animal() {
+    override fun onInitCalled() {}
 
     constructor(breed: String) : this() {
         println("print the $breed")
