@@ -20,7 +20,7 @@ class VerifyLambda : StringSpec({
 
         tested.checkService(success, error)
 
-        Mockito.verify(success).invoke(true)
+        Mockito.verify(success)(true)
     }
 
 })
