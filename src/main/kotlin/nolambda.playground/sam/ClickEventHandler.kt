@@ -1,11 +1,14 @@
-package com.esafirm.kotlin.playground.sam
+package nolambda.playground.sam
 
+import com.esafirm.kotlin.playground.sam.ClickHandler
+import com.esafirm.kotlin.playground.sam.OnClickKotlin
+import com.esafirm.kotlin.playground.sam.OnClickListenerJava
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-fun main(args: Array<String>) {
+fun main() {
     ClickHandler().apply {
 
         setOnClickListener { println(it) }
