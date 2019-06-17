@@ -2,7 +2,9 @@ package nolambda.playground.coroutine
 
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import nolambda.playground.concurrent.delay
 
@@ -21,14 +23,19 @@ class DelayFlowSpec : StringSpec({
     "Flow with delay" {
         val flow = flow {
             repeat(10) {
+                delay(10)
                 emit(it)
-                delay(100)
             }
-        }.sample(1)
+        }.sample(20)
+
+        var flowSize: Int? = null
+        GlobalScope.launch {
+            flowSize = flow.toList().size
+        }
 
         runBlocking {
-            delay(100)
-            println(flow.toList())
+            delay(1000)
+            flowSize shouldBe 5
         }
     }
 })
