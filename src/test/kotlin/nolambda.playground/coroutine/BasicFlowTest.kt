@@ -4,9 +4,7 @@ import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
 import kotlinx.coroutines.channels.consume
 import kotlinx.coroutines.channels.produce
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 
 @Suppress("EXPERIMENTAL_API_USAGE")
