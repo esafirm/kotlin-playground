@@ -43,7 +43,7 @@ class DelayFlowSpec : StringSpec({
 @Suppress("EXPERIMENTAL_API_USAGE")
 private suspend fun FlowCollector<Int>.emitFlow() {
     (0..10).forEach {
-        emit(it)
+        this.emit(it)
         delay(50)
     }
 }
