@@ -22,7 +22,7 @@ fun main() {
 }
 
 class Sender {
-    val dispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+    private val dispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
     fun init() = GlobalScope.launch(dispatcher) {
         safeSleep(200)
