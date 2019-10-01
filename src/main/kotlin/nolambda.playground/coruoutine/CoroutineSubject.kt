@@ -48,7 +48,7 @@ fun main() = runBlocking {
 
     launch {
         println("Subject observe")
-
+        
         subject.observe {
             println("Observe: $it")
         }
