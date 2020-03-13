@@ -1,10 +1,11 @@
-package nolambda.playground.coruoutine
+package nolambda.playground.coroutine
 
 import io.kotlintest.specs.StringSpec
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.verifySequence
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import nolambda.playground.coruoutine.SingleExecutorWithDelay
 
 class SingleExecutorWithDelaySpec : StringSpec({
 
