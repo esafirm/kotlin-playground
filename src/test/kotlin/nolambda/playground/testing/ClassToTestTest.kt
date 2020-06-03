@@ -8,7 +8,7 @@ internal class ClassToTestTest : StringSpec({
 
     "It should cover all the way through" {
         val sut = ClassToTest()
-        val mockRunnable = mockk<Runnable>(relaxed = true)
+        val mockRunnable = mockk<Runnable>()
         sut.testNullable(mockRunnable)
         sut.testNullable(null)
 
