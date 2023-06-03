@@ -29,12 +29,12 @@ class SelectSpec : StringSpec({
 
             while (!isDone) {
                 select<Unit> {
-                    producer.onReceiveOrNull {
-                        if (it == null) {
+                    producer.onReceiveCatching {
+                        if (it.exceptionOrNull() == null) {
                             println("End")
                             isDone = true
                         } else {
-                            lastValue = it
+                            lastValue = it.getOrNull()
                         }
                     }
 

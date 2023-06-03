@@ -4,14 +4,14 @@ import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withTimeout
 
 
 class Suspendable(
     private val action: () -> Unit,
-    private val timeout: Long = 1
+    private val timeout: Long = 1,
 ) {
     suspend fun run(): String {
 
@@ -25,7 +25,7 @@ class Suspendable(
 
 class TestDispatcherTest : StringSpec({
 
-    val testDispatcher = TestCoroutineScope()
+    val testDispatcher = UnconfinedTestDispatcher()
 
     "Suspend function should follow it scope" {
 
@@ -33,11 +33,10 @@ class TestDispatcherTest : StringSpec({
         val suspendable = Suspendable(mockAction)
 
         coEvery { mockAction.invoke() } answers {
-            testDispatcher.advanceTimeBy(1000)
             Unit
         }
 
-        testDispatcher.runBlockingTest {
+        runTest(testDispatcher) {
             val result = suspendable.run()
             result shouldBe "A"
         }

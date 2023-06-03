@@ -9,16 +9,15 @@ import kotlinx.coroutines.flow.*
 @ExperimentalCoroutinesApi
 @FlowPreview
 fun main() = runBlocking {
-    val channel = BroadcastChannel<String>(100)
+    val channel = MutableSharedFlow<String>(100)
 
     launch {
         println("Collecting…")
 
         val list = mutableListOf<String>()
-        channel.asFlow()
-            .onEach {
-                println("each: $it")
-            }
+        channel.onEach {
+            println("each: $it")
+        }
             .transform<String, List<String>> {
                 emit(list.apply { add(it) }.toList())
             }
@@ -33,19 +32,19 @@ fun main() = runBlocking {
     GlobalScope.launch {
         println("Send…")
 
-        channel.offer("A")
-        channel.offer("B")
-        channel.offer("C")
-        channel.offer("D")
-        channel.offer("E")
+        channel.emit("A")
+        channel.emit("B")
+        channel.emit("C")
+        channel.emit("D")
+        channel.emit("E")
 
         delay(1000)
-        channel.offer("A")
-        channel.offer("B")
-        channel.offer("C")
-        channel.offer("D")
-        channel.offer("E")
-        channel.offer("F")
+        channel.emit("A")
+        channel.emit("B")
+        channel.emit("C")
+        channel.emit("D")
+        channel.emit("E")
+        channel.emit("F")
     }
 
     Unit
