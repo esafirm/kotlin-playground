@@ -20,12 +20,6 @@ jacocoTestReport {
     }
 }
 
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-}
-
 repositories {
     mavenCentral()
 }
